@@ -1,0 +1,15 @@
+#!/bin/sh
+# postinst script
+
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -z "${DPKG_ROOT:-}" ] && [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		deb-systemd-invoke restart 'tpm2-abrmd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

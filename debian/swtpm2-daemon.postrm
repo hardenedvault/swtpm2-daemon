@@ -1,0 +1,29 @@
+#!/bin/sh
+# postinst script
+
+set -e
+
+VAR_PATH=/var/lib/swtpm2
+
+# Source the debconf shell library.
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    purge)
+	if [ -d "$VAR_PATH" ]; then
+            rm -rf "$VAR_PATH"
+	fi
+    ;;
+
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

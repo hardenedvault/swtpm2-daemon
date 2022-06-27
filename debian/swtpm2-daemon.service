@@ -1,0 +1,21 @@
+[Unit]
+Description=Software emulated tpm2 run as a daemon
+After=network.target
+
+[Service]
+Environment="VAR_PATH=/var/lib/swtpm2" "RUN_PATH=/run/swtpm2"
+EnvironmentFile=-/etc/default/swtpm2-daemon
+User=tss
+Group=tss
+PIDFile=${RUN_PATH}/swtpm.pid
+#ExecStartPre=+swtpm2-make-run-path
+#ExecStartPre=+mkdir -p ${RUN_PATH}
+#ExecStartPre=+chown ${USER}:${GROUP} ${RUN_PATH}
+#ExecStartPre=chmod 755 ${RUN_PATH}
+ExecStart=swtpm2-start
+#ExecStartPre=-swtpm_setup --tpmstate ${VAR_PATH} --create-ek-cert --create-platform-cert --tpm2
+#ExecStart=swtpm socket --tpmstate dir=${VAR_PATH} --tpm2 --ctrl type=unixio,path=${RUN_PATH}/tpm.ctrl, --server type=unixio,path=${RUN_PATH}/tpm --flags not-need-init
+#ExecStart=swtpm socket --tpmstate dir=${VAR_PATH} --tpm2 --ctrl type=tcp,port=2322, --server type=tcp,port=2321 --flags not-need-init
+
+[Install]
+WantedBy=multi-user.target

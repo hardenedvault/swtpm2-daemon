@@ -1,0 +1,20 @@
+Source: swtpm2-daemon
+Section: unknown
+Priority: optional
+Maintainer: Ivan Kuzneczov <ivan.kuzneczov@hardenedvault.net>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.0
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Browser: https://salsa.debian.org/debian/swtpm2-daemon
+#Vcs-Git: https://salsa.debian.org/debian/swtpm2-daemon.git
+Rules-Requires-Root: no
+
+Package: swtpm2-daemon
+Architecture: all
+Depends: swtpm-tools, systemd
+Description: swtpm configuration for a daemonized TPM2 emulator
+
+Package: tpm2-abrmd-swtpm
+Architecture: all
+Depends: swtpm2-daemon, tpm2-abrmd, systemd
+Description: TPM2 abrmd configuration used with daemonized swtpm

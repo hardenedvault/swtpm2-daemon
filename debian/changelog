@@ -1,0 +1,5 @@
+swtpm2-daemon (1) UNRELEASED; urgency=medium
+
+  * Initial Release.
+
+ -- Ivan Kuzneczov <ivan.kuzneczov@hardenedvault.net>  Mon, 11 Apr 2022 16:32:45 +0300

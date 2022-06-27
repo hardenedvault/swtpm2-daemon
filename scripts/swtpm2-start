@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ ! -f ${VAR_PATH}/tpm2-00.permall ]; then
+    swtpm_setup --tpmstate ${VAR_PATH} --create-ek-cert --create-platform-cert --tpm2
+fi
+
+exec swtpm socket --tpmstate dir=${VAR_PATH} --tpm2 --ctrl type=unixio,path=${RUN_PATH}/tpm.ctrl, --server type=unixio,path=${RUN_PATH}/tpm --flags not-need-init
